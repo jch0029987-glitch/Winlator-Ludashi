@@ -35,21 +35,22 @@ public abstract class Box64PresetManager {
         EnvVars envVars = new EnvVars();
 
         if (id.equals(Box64Preset.STABILITY)) {
-            envVars.put(ucPrefix+"_DYNAREC_SAFEFLAGS", "2");
+            envVars.put(ucPrefix+"_DYNAREC_SAFEFLAGS", "1");      // Set to 1 for better modern game logic
             envVars.put(ucPrefix+"_DYNAREC_FASTNAN", "0");
             envVars.put(ucPrefix+"_DYNAREC_FASTROUND", "0");
             envVars.put(ucPrefix+"_DYNAREC_X87DOUBLE", "1");
-            envVars.put(ucPrefix+"_DYNAREC_BIGBLOCK", "0");
-            envVars.put(ucPrefix+"_DYNAREC_STRONGMEM", "2");
+            envVars.put(ucPrefix+"_DYNAREC_BIGBLOCK", "0");       // Essential to prevent Pixel 7 overheating
+            envVars.put(ucPrefix+"_DYNAREC_STRONGMEM", "1");      // 1 is more compatible for Tensor G2 than 2
             envVars.put(ucPrefix+"_DYNAREC_FORWARD", "128");
-            envVars.put(ucPrefix+"_DYNAREC_CALLRET", "0");
-            envVars.put(ucPrefix+"_DYNAREC_WAIT", "0");
+            envVars.put(ucPrefix+"_DYNAREC_CALLRET", "1");        // Enable for DX11/GTA V stability
+            envVars.put(ucPrefix+"_DYNAREC_WAIT", "1");           // Force wait to prevent race-condition crashes
             if (ucPrefix.equals("BOX64")) {
                 envVars.put("BOX64_AVX", "0");
                 envVars.put("BOX64_UNITYPLAYER", "1");
                 envVars.put("BOX64_MMAP32", "0");
             }
         }
+            
         else if (id.equals(Box64Preset.COMPATIBILITY)) {
             envVars.put(ucPrefix+"_DYNAREC_SAFEFLAGS", "2");
             envVars.put(ucPrefix+"_DYNAREC_FASTNAN", "0");
